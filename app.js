@@ -77,6 +77,18 @@ document.querySelectorAll("video[data-media]").forEach((video) => {
     started = false;
   });
 });
+
+const installmentPanel = document.getElementById("parcelamento");
+if (installmentPanel) {
+  document.querySelectorAll('a[href="#parcelamento"]').forEach((link) => {
+    link.addEventListener("click", () => { installmentPanel.open = true; });
+  });
+  installmentPanel.addEventListener("toggle", () => {
+    if (installmentPanel.open) track("parcelamento_open");
+  });
+  if (location.hash === "#parcelamento") installmentPanel.open = true;
+}
+
 document.querySelectorAll(".faq-list details").forEach((detail, i) => {
   detail.addEventListener("toggle", () => {
     if (detail.open) track("faq_" + (i + 1) + "_open", {faq_number: i + 1});
